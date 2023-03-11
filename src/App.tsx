@@ -1,6 +1,5 @@
 import { useState } from "react";
-const cdnURL =
-  "https://cdn.glitch.global/de7f29c8-57eb-4eb1-81b5-4e0d8565ade5/";
+const cdnURL = "https://react-transitions-api-demo.vercel.app/image/";
 
 type Image = {
   name: string;
@@ -13,30 +12,30 @@ interface ExDocument extends Document {
 
 const imageData: Image[] = [
   {
-    name: "Jungle coast",
-    file: "jungle-coast",
+    name: "チューリップ",
+    file: "25603452.png",
   },
   {
-    name: "Bird in the tree",
-    file: "tree-bird",
+    name: "スカイツリー",
+    file: "25447899.png",
   },
   {
-    name: "A view from the sky",
-    file: "view-from-the-sky",
+    name: "つくし",
+    file: "25794366.png",
   },
   {
-    name: "The view across the water",
-    file: "watery-view",
+    name: "ネモフィラ",
+    file: "25839343.png",
   },
 ];
 
 function App() {
-  const [src, setSrc] = useState(cdnURL + imageData[0].file + ".jpg");
+  const [src, setSrc] = useState(cdnURL + imageData[0].file);
   const [text, setText] = useState(imageData[0].name);
 
   const handelClick = (data: Image) => {
     const displayNewImage = () => {
-      setSrc(cdnURL + data.file + ".jpg");
+      setSrc(cdnURL + data.file);
       setText(data.name);
     };
     const doc: ExDocument = document;
@@ -61,7 +60,12 @@ function App() {
                 title={`Click to load ${data.name} in main gallery view`}
                 onClick={() => handelClick(data)}
               >
-                <img alt={data.name} src={cdnURL + data.file + "_th.jpg"} />
+                <img
+                  alt={data.name}
+                  src={cdnURL + "thumb/" + data.file}
+                  width={100}
+                  height={100}
+                />
               </a>
             );
           })}
@@ -75,6 +79,15 @@ function App() {
           </figure>
         </section>
       </main>
+      <footer className="footer">
+        <a
+          href="https://github.com/Nyamadamadamada/React_Transitions_API"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          See source code
+        </a>
+      </footer>
     </div>
   );
 }
