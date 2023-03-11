@@ -35,6 +35,7 @@ function App() {
       setSrc(cdnURL + data.file + ".jpg");
       setText(data.name);
     };
+    // DOM を更新するための引数としてコールバック関数を配置
     document.startViewTransition(() => displayNewImage());
   };
   return (
