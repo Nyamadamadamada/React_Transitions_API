@@ -7,6 +7,10 @@ type Image = {
   file: string;
 };
 
+interface ExDocument extends Document {
+  startViewTransition?: any;
+}
+
 const imageData: Image[] = [
   {
     name: "Jungle coast",
@@ -35,8 +39,14 @@ function App() {
       setSrc(cdnURL + data.file + ".jpg");
       setText(data.name);
     };
-    // DOM を更新するための引数としてコールバック関数を配置
-    document.startViewTransition(() => displayNewImage());
+    const doc: ExDocument = document;
+    // View Transitions API未対応のブラウザの場合
+    if (!doc.startViewTransition) {
+      displayNewImage();
+      return;
+    }
+    // 引数にDOM更新用のコールバック関数を渡す
+    doc.startViewTransition(() => displayNewImage());
   };
   return (
     <div className="App">
